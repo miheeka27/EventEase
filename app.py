@@ -5,6 +5,7 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
+import re
 
 from database import get_db_connection, init_db
 
@@ -63,6 +64,12 @@ def register():
             flash("Please fill in all fields.")
             return render_template("register.html")
 
+        # Validate email format
+        email_pattern = r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+        if not re.match(email_pattern, email):
+            flash("Please enter a valid email address.")
+            return render_template("register.html")
+
         if len(password) < 8:
             flash("Password must be at least 8 characters.")
             return render_template("register.html")
@@ -76,6 +83,7 @@ def register():
                 (name, email, generate_password_hash(password))
             )
             connection.commit()
+
         except sqlite3.IntegrityError:
             connection.close()
             flash("This email is already registered.")
