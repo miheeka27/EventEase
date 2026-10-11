@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EventEase | College Event Booking</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">EventEase</div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('view_events') }}">Events</a>
+
+            {% if session.get('user_id') %}
+                <span>Hi, {{ session.get('user_name') }}!</span>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for('register') }}">Register</a>
+                <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Discover Events. Create Memories.</h1>
+
+        <p>
+            Your one-stop platform for discovering and booking
+            exciting college events.
+        </p>
+
+        <a href="{{ url_for('view_events') }}">
+            <button>Explore Events</button>
+        </a>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="events">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-container">
+
+            {% for event in events %}
+
+                <div class="event-card">
+                    <h3>{{ event.name }}</h3>
+
+                    <p>
+                        <strong>Date:</strong> {{ event.date }}
+                    </p>
+
+                    <p>
+                        <strong>Venue:</strong> {{ event.venue }}
+                    </p>
+
+                    <p>
+                        <strong>Price:</strong>
+                        {% if event.price == 0 %}
+                            Free
+                        {% else %}
+                            ₹{{ event.price }}
+                        {% endif %}
+                    </p>
+
+                    <a href="{{ url_for('event_details', event_id=event.id) }}">
+                        <button>View Event</button>
+                    </a>
+                </div>
+
+            {% else %}
+
+                <p>No upcoming events available right now.</p>
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 EventEase | College Event Booking System</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.name }} | EventEase</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EventEase</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/events">Events</a>
+
+            {% if session.get('user_id') %}
+                <a href="/my-bookings">My Bookings</a>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <section class="events">
+        <div class="event-card">
+            <h2>{{ event.name }}</h2>
+
+            <p><strong>Date:</strong> {{ event.date }}</p>
+            <p><strong>Venue:</strong> {{ event.venue }}</p>
+            <p><strong>Price:</strong>
+                {% if event.price == 0 %}
+                    Free
+                {% else %}
+                    ₹{{ event.price }}
+                {% endif %}
+            </p>
+            <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+            <p>{{ event.description or "More details coming soon." }}</p>
+
+            {% with messages = get_flashed_messages() %}
+                {% for message in messages %}
+                    <p class="message">{{ message }}</p>
+                {% endfor %}
+            {% endwith %}
+
+            {% if session.get('user_id') %}
+                <form method="POST"
+                      action="{{ url_for('book_event', event_id=event.id) }}">
+                    <label for="tickets">Number of tickets (1–10)</label>
+                    <input type="number" id="tickets" name="tickets"
+                           min="1" max="10" value="1" required>
+                    <button type="submit">Book Tickets</button>
+                </form>
+            {% else %}
+                <p>Please log in to book tickets.</p>
+                <a href="{{ url_for('login') }}">
+                    <button type="button">Login to Book</button>
+                </a>
+            {% endif %}
+
+            <p><a href="{{ url_for('view_events') }}">Back to Events</a></p>
+        </div>
+    </section>
+
+</body>
+</html>

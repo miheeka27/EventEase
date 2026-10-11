@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EventEase</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EventEase Admin</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/events">Events</a>
+            <a href="/admin">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <section class="events">
+        <h2>Admin Dashboard</h2>
+        <p>Welcome, {{ session.get('user_name') }}!</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <p>
+            <a href="{{ url_for('add_event') }}">
+                <button type="button">+ Add New Event</button>
+            </a>
+        </p>
+
+        <h3>Manage Events</h3>
+
+        <div class="event-container">
+            {% for event in events %}
+                <div class="event-card">
+                    <h3>{{ event.name }}</h3>
+                    <p><strong>Date:</strong> {{ event.date }}</p>
+                    <p><strong>Venue:</strong> {{ event.venue }}</p>
+                    <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+                    <p><strong>Price:</strong>
+                        {% if event.price == 0 %}
+                            Free
+                        {% else %}
+                            ₹{{ event.price }}
+                        {% endif %}
+                    </p>
+
+                    <a href="{{ url_for('event_details', event_id=event.id) }}">
+                        View Event
+                    </a>
+                </div>
+            {% else %}
+                <p>No events found. Add your first event!</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer>
+        <p>EventEase Admin Panel</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | EventEase</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">EventEase</div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/events">Events</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <section class="events">
+        <h2>My Bookings</h2>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p class="message">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        {% if bookings %}
+            <div class="event-container">
+                {% for booking in bookings %}
+                    <div class="event-card">
+                        <h3>{{ booking.name }}</h3>
+                        <p><strong>Date:</strong> {{ booking.date }}</p>
+                        <p><strong>Venue:</strong> {{ booking.venue }}</p>
+                        <p><strong>Tickets:</strong> {{ booking.tickets }}</p>
+                        <p><strong>Price per ticket:</strong>
+                            {% if booking.price == 0 %}
+                                Free
+                            {% else %}
+                                ₹{{ booking.price }}
+                            {% endif %}
+                        </p>
+                        <p><strong>Total:</strong> ₹{{ booking.price * booking.tickets }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>You haven't booked any events yet.</p>
+            <a href="{{ url_for('view_events') }}">Explore Events</a>
+        {% endif %}
+    </section>
+
+</body>
+</html>
