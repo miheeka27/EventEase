@@ -1,0 +1,24 @@
+{% macro price(event) -%}
+    {% if event.price == 0 %}Free{% else %}&#8377;{{ '%g' % event.price }}{% endif %}
+{%- endmacro %}
+
+{% macro event_card(event) %}
+    {% set d = date_parts(event.date) %}
+    <article class="card event-card" data-category="{{ event.category or '' }}"
+             data-search="{{ (event.name ~ ' ' ~ (event.organizer or '') ~ ' ' ~ (event.venue or ''))|lower }}">
+        <a class="card-media" href="{{ url_for('event_details', event_id=event.id) }}">
+            <img src="{{ event_image(event) }}" alt="{{ event.name }} poster" loading="lazy">
+            <span class="date-badge"><b>{{ d[0] }}</b>{{ d[1] }}</span>
+            {% if event.category %}<span class="chip chip-overlay">{{ event.category }}</span>{% endif %}
+        </a>
+        <div class="card-body">
+            {% if event.organizer %}<p class="organizer">{{ event.organizer }}</p>{% endif %}
+            <h3>{{ event.name }}</h3>
+            <p class="meta">&#128205; {{ event.venue }}</p>
+            <div class="card-footer">
+                <span class="price">{{ price(event) }}</span>
+                <a class="btn btn-small" href="{{ url_for('event_details', event_id=event.id) }}">View Event</a>
+            </div>
+        </div>
+    </article>
+{% endmacro %}

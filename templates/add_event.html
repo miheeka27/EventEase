@@ -1,66 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Add Event{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Event | EventEase</title>
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% block content %}
+<section class="auth-wrap">
+    <div class="card auth-card wide">
+        <h2>Add a New Event</h2>
+        <p class="muted">Enter the details of your college event.</p>
 
-    <nav>
-        <div class="logo">EventEase Admin</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/events">Events</a>
-            <a href="/admin">Dashboard</a>
-            <a href="/logout">Logout</a>
-        </div>
-    </nav>
+        <form method="POST" action="{{ url_for('add_event') }}">
+            <label for="name">Event Name</label>
+            <input type="text" id="name" name="name" required>
 
-    <section class="events">
-        <div class="event-card auth-card">
-            <h2>Add a New Event</h2>
-            <p>Enter the details of your college event.</p>
+            <div class="two-col">
+                <div>
+                    <label for="organizer">Club / Committee</label>
+                    <input type="text" id="organizer" name="organizer" placeholder="e.g. CSI">
+                </div>
+                <div>
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option value="">Select...</option>
+                        <option>Sports</option>
+                        <option>Tech</option>
+                        <option>Workshop</option>
+                        <option>Community</option>
+                        <option>Cultural</option>
+                    </select>
+                </div>
+            </div>
 
-            {% with messages = get_flashed_messages() %}
-                {% for message in messages %}
-                    <p class="message">{{ message }}</p>
-                {% endfor %}
-            {% endwith %}
+            <div class="two-col">
+                <div>
+                    <label for="date">Event Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="venue">Venue</label>
+                    <input type="text" id="venue" name="venue" required>
+                </div>
+            </div>
 
-            <form method="POST" action="{{ url_for('add_event') }}">
-                <label for="name">Event Name</label>
-                <input type="text" id="name" name="name" required>
+            <div class="two-col">
+                <div>
+                    <label for="price">Ticket Price (&#8377;)</label>
+                    <input type="number" id="price" name="price" min="0" step="0.01" value="0" required>
+                </div>
+                <div>
+                    <label for="capacity">Ticket Capacity</label>
+                    <input type="number" id="capacity" name="capacity" min="1" value="100" required>
+                </div>
+            </div>
 
-                <label for="date">Event Date</label>
-                <input type="date" id="date" name="date" required>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4"></textarea>
 
-                <label for="venue">Venue</label>
-                <input type="text" id="venue" name="venue" required>
+            <button type="submit" class="btn btn-block">Add Event</button>
+        </form>
 
-                <label for="price">Ticket Price (₹)</label>
-                <input type="number" id="price" name="price"
-                       min="0" step="0.01" value="0" required>
-
-                <label for="capacity">Ticket Capacity</label>
-                <input type="number" id="capacity" name="capacity"
-                       min="1" value="100" required>
-
-                <label for="description">Description</label>
-                <textarea id="description" name="description"
-                          rows="4"></textarea>
-
-                <button type="submit">Add Event</button>
-            </form>
-
-            <p><a href="{{ url_for('admin_dashboard') }}">
-                Back to Dashboard
-            </a></p>
-        </div>
-    </section>
-
-</body>
-</html>
+        <p class="auth-switch"><a href="{{ url_for('admin_dashboard') }}">&larr; Back to Dashboard</a></p>
+    </div>
+</section>
+{% endblock %}
