@@ -1,52 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | EventEase</title>
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% block content %}
+<section class="auth-wrap">
+    <div class="card auth-card">
+        <h2>Welcome Back!</h2>
+        <p class="muted">Log in to your EventEase account.</p>
 
-    <nav>
-        <div class="logo">EventEase</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/events">Events</a>
-            <a href="/register">Register</a>
-        </div>
-    </nav>
+        <form method="POST" action="{{ url_for('login') }}">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
 
-    <section class="events">
-        <div class="event-card auth-card">
-            <h2>Welcome Back!</h2>
-            <p>Log in to your EventEase account.</p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
 
-            {% with messages = get_flashed_messages() %}
-                {% for message in messages %}
-                    <p class="message">{{ message }}</p>
-                {% endfor %}
-            {% endwith %}
+            <button type="submit" class="btn btn-block">Login</button>
+        </form>
 
-            <form method="POST" action="/login">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email"
-                       autocomplete="email" required>
-
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password"
-                       autocomplete="current-password" required>
-
-                <button type="submit">Login</button>
-            </form>
-
-            <p>Don't have an account?
-                <a href="/register">Register here</a>
-            </p>
-        </div>
-    </section>
-
-</body>
-</html>
+        <p class="auth-switch">New here? <a href="{{ url_for('register') }}">Create an account</a></p>
+    </div>
+</section>
+{% endblock %}

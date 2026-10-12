@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="shazam-cricket">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="120" cy="90" r="170" fill="#ffffff" fill-opacity="0.07"/>
+  <circle cx="720" cy="440" r="210" fill="#000000" fill-opacity="0.10"/>
+  <circle cx="640" cy="70" r="60" fill="#ffffff" fill-opacity="0.08"/>
+  <circle cx="400" cy="250" r="230" fill="url(#glow)"/>
+  <rect x="260" y="395" width="280" height="14" rx="7" fill="#fff" fill-opacity=".35"/>
+  <g transform="translate(400 250)"><g transform="rotate(35)">
+  <rect x="-22" y="-170" width="44" height="110" rx="14" fill="#2b2b2b"/>
+  <path d="M-48 -70 Q-48 -60 -46 -50 L-40 120 Q0 140 40 120 L46 -50 Q48 -60 48 -70 Z" fill="#e8c27a" stroke="#b98b3e" stroke-width="5"/>
+  <line x1="0" y1="-60" x2="0" y2="120" stroke="#b98b3e" stroke-width="4"/>
+</g>
+<circle cx="-120" cy="95" r="52" fill="#dc2626"/>
+<path d="M-160 70 Q-120 95 -160 120 M-80 70 Q-120 95 -80 120" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="6 5"/></g>
+</svg>

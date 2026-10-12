@@ -1,47 +1,63 @@
+{% extends "base.html" %}
+{% from "_macros.html" import event_card with context %}
+{% block title %}Upcoming Events{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upcoming Events | EventEase</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% block content %}
+<section class="page-head">
+    <h1>All Upcoming Events</h1>
+    <p>Find something to join. Search by name or club, or filter by type.</p>
 
-    <nav>
-        <div class="logo">EventEase</div>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/events">Events</a>
-        </div>
-    </nav>
-
-    <section class="events">
-        <h2>All Upcoming Events</h2>
-
-        <div class="event-container">
-            {% for event in events %}
-            <div class="event-card">
-                <h3>{{ event.name }}</h3>
-                <p>Date: {{ event.date }}</p>
-                <p>Venue: {{ event.venue }}</p>
-
-                <p>
-                    {% if event.price == 0 %}
-                        Free
-                    {% else %}
-                        ₹{{ event.price }}
-                    {% endif %}
-                </p>
-
-                <a href="{{ url_for('event_details', event_id=event.id) }}">
-                    <button>View Details</button>
-                </a>
-            </div>
+    <div class="toolbar">
+        <input type="search" id="event-search" placeholder="Search events or clubs..." aria-label="Search events">
+        <div class="filters" id="event-filters">
+            <button type="button" class="chip-btn active" data-filter="">All</button>
+            {% for category in events|map(attribute='category')|select|unique|list %}
+                <button type="button" class="chip-btn" data-filter="{{ category }}">{{ category }}</button>
             {% endfor %}
         </div>
-    </section>
+    </div>
+</section>
 
-</body>
-</html>
+<section class="section">
+    <div class="grid" id="event-grid">
+        {% for event in events %}
+            {{ event_card(event) }}
+        {% else %}
+            <p class="empty">No events yet. Check back soon!</p>
+        {% endfor %}
+    </div>
+    <p class="empty" id="no-results" hidden>No events match your search.</p>
+</section>
+
+<script>
+    (function () {
+        var search = document.getElementById("event-search");
+        var filters = document.getElementById("event-filters");
+        var cards = document.querySelectorAll("#event-grid .event-card");
+        var empty = document.getElementById("no-results");
+        var activeCategory = "";
+
+        function apply() {
+            var q = search.value.trim().toLowerCase();
+            var shown = 0;
+            cards.forEach(function (card) {
+                var okCat = !activeCategory || card.dataset.category === activeCategory;
+                var okText = !q || card.dataset.search.indexOf(q) !== -1;
+                card.hidden = !(okCat && okText);
+                if (!card.hidden) { shown++; }
+            });
+            empty.hidden = shown !== 0 || cards.length === 0;
+        }
+
+        search.addEventListener("input", apply);
+        filters.addEventListener("click", function (e) {
+            var button = e.target.closest(".chip-btn");
+            if (!button) { return; }
+            filters.querySelectorAll(".chip-btn").forEach(function (b) { b.classList.remove("active"); });
+            button.classList.add("active");
+            activeCategory = button.dataset.filter;
+            apply();
+        });
+    })();
+</script>
+{% endblock %}

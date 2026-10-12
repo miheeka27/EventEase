@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="beach-cleanup">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06b6d4"/><stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="120" cy="90" r="170" fill="#ffffff" fill-opacity="0.07"/>
+  <circle cx="720" cy="440" r="210" fill="#000000" fill-opacity="0.10"/>
+  <circle cx="640" cy="70" r="60" fill="#ffffff" fill-opacity="0.08"/>
+  <circle cx="400" cy="250" r="230" fill="url(#glow)"/>
+  
+  <g transform="translate(400 250)"><circle cx="170" cy="-110" r="62" fill="#fde047"/>
+<circle cx="170" cy="-110" r="86" fill="#fde047" fill-opacity=".25"/>
+<path d="M-400 40 Q-300 0 -200 40 T0 40 T200 40 T400 40 V250 H-400 Z" fill="#0ea5e9" fill-opacity=".85"/>
+<path d="M-400 90 Q-300 55 -200 90 T0 90 T200 90 T400 90 V250 H-400 Z" fill="#0369a1" fill-opacity=".9"/>
+<path d="M-400 165 Q-200 120 0 165 T400 150 V250 H-400 Z" fill="#fcd9a0"/>
+<g transform="translate(-60 -40)">
+  <rect x="-48" y="-10" width="96" height="120" rx="12" fill="#16a34a"/>
+  <rect x="-58" y="-26" width="116" height="22" rx="8" fill="#15803d"/>
+  <path d="M0 22 q22 -14 30 8 q-22 14 -30 -8 Z M0 22 q-22 -14 -30 8 q22 14 30 -8 Z M0 24 V70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<rect x="95" y="60" width="26" height="70" rx="9" fill="#e0f2fe" fill-opacity=".9" transform="rotate(25 108 95)"/></g>
+</svg>

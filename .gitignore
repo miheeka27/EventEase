@@ -6,3 +6,5 @@ database.db
 database_old.db
 .env
 .pytest_cache/
+test-reports/
+.venv/

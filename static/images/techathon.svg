@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="techathon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0ea5e9"/><stop offset="1" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="120" cy="90" r="170" fill="#ffffff" fill-opacity="0.07"/>
+  <circle cx="720" cy="440" r="210" fill="#000000" fill-opacity="0.10"/>
+  <circle cx="640" cy="70" r="60" fill="#ffffff" fill-opacity="0.08"/>
+  <circle cx="400" cy="250" r="230" fill="url(#glow)"/>
+  <g stroke="#22d3ee" stroke-opacity=".35" stroke-width="3" fill="none"><path d="M0 420 H180 L230 470 H420"/><path d="M800 90 H640 L590 40 H460"/><path d="M0 120 H110 L150 80"/></g><g fill="#22d3ee" fill-opacity=".6"><circle cx="420" cy="470" r="7"/><circle cx="460" cy="40" r="7"/><circle cx="150" cy="80" r="7"/></g>
+  <g transform="translate(400 250)"><polyline points="-70,-95 -165,0 -70,95" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="70,-95 165,0 70,95" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="28" y1="-125" x2="-28" y2="125" stroke="#22d3ee" stroke-width="22" stroke-linecap="round"/></g>
+</svg>
