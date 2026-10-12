@@ -1,0 +1,17 @@
+# Nagios Core for EventEase. Start the app first (docker compose up -d),
+# then:  docker compose -f docker-compose.monitoring.yml up -d
+# Open http://localhost:8081  (user: nagiosadmin / password: nagios)
+services:
+  nagios:
+    image: jasonrivers/nagios:latest
+    container_name: eventease-nagios
+    ports:
+      - "8081:80"
+    environment:
+      NAGIOSADMIN_USER: nagiosadmin
+      NAGIOSADMIN_PASS: nagios
+    volumes:
+      - ./nagios-config:/opt/nagios/etc/conf.d:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
