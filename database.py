@@ -154,7 +154,7 @@ def init_db():
              organizer, category, image)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, COLLEGE_EVENTS)
-
+ 
     connection.commit()
     connection.close()
 
